@@ -256,7 +256,7 @@ $popularSearches = ['Remote', 'Full-time', 'Translation', 'Sales', 'IT'];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -364,6 +364,50 @@ $popularSearches = ['Remote', 'Full-time', 'Translation', 'Sales', 'IT'];
         ::-webkit-scrollbar-track { background: var(--background); border-radius: 8px; }
         ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 8px; }
         .dark ::-webkit-scrollbar-track { background: #374151; }
+
+        /* ===== Parallax hero & effects ===== */
+        h1, h2, .font-display { font-family: 'Bricolage Grotesque', 'Inter', sans-serif; letter-spacing: -.02em; }
+        .hero { --mx: 0; --my: 0; --sy: 0; position: relative; overflow: hidden; color: #fff; background: #081029; min-height: min(100vh, 880px); display: flex; align-items: center; padding: 8rem 0 7rem; }
+        .px { transform: translate3d(calc(var(--mx) * var(--m, 0) * 1px), calc(var(--my) * var(--m, 0) * 1px + var(--sy) * var(--s, 0) * 1px), 0); will-change: transform; }
+        .hero-layer { position: absolute; inset: -6%; pointer-events: none; }
+        .aurora { position: absolute; border-radius: 50%; filter: blur(90px); animation: drift 14s ease-in-out infinite alternate; }
+        .a1 { width: 560px; height: 560px; left: 2%; top: 4%; background: #2563EB; opacity: .5; }
+        .a2 { width: 460px; height: 460px; right: 4%; bottom: 6%; background: #10B981; opacity: .28; animation-delay: -6s; }
+        .a3 { width: 380px; height: 380px; right: 30%; top: -4%; background: #60A5FA; opacity: .25; animation-delay: -3s; }
+        @keyframes drift { to { translate: 40px -30px; } }
+        .hero-grid { background-image: radial-gradient(rgba(255,255,255,.16) 1px, transparent 1px); background-size: 28px 28px; -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 15%, transparent 72%); mask-image: radial-gradient(ellipse at 50% 45%, #000 15%, transparent 72%); }
+        .arc { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.6s .5s cubic-bezier(.4,0,.2,1) forwards; }
+        @keyframes draw { to { stroke-dashoffset: 0; } }
+        .node text { fill: #fff; font: 600 15px Inter, sans-serif; opacity: .85; }
+        .ring { fill: none; stroke-width: 1.5; transform-box: fill-box; transform-origin: center; animation: ring 2.6s ease-out infinite; }
+        @keyframes ring { from { transform: scale(1); opacity: .9; } to { transform: scale(6); opacity: 0; } }
+        .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .14em; margin-bottom: -.14em; }
+        .w > span { display: inline-block; transform: translateY(115%); animation: rise .9s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--i) * 80ms + 150ms); }
+        @keyframes rise { to { transform: none; } }
+        .fade-in { opacity: 0; animation: fadeUp .8s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: var(--dl, .8s); }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+        .chip { position: absolute; width: 250px; pointer-events: auto; color: #fff; }
+        .chip-in { display: flex; align-items: center; gap: .75rem; padding: .8rem 1rem; border-radius: 1rem; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 24px 40px -22px rgba(0,0,0,.7); animation: bob 6s ease-in-out infinite; transition: background .3s; }
+        .chip:hover .chip-in { background: rgba(255,255,255,.16); }
+        .chip-ico { flex: none; width: 2.4rem; height: 2.4rem; border-radius: .7rem; display: grid; place-items: center; background: linear-gradient(135deg, #10B981, #3B82F6); }
+        @keyframes bob { 50% { translate: 0 -12px; } }
+        .mq { overflow: hidden; white-space: nowrap; padding: 2rem 0 1rem; display: grid; gap: .25rem; }
+        .mq-track { display: inline-flex; align-items: center; gap: 2.5rem; will-change: transform; }
+        .mq-item { font-family: 'Bricolage Grotesque', 'Inter', sans-serif; font-weight: 800; font-size: clamp(3rem, 8vw, 6.5rem); line-height: 1.05; letter-spacing: -.03em; }
+        .mq-out { color: transparent; -webkit-text-stroke: 1.5px rgba(30,58,138,.55); }
+        .mq-fill { color: var(--primary); }
+        .mq-dot { flex: none; width: .9rem; height: .9rem; border-radius: 50%; background: var(--accent); }
+        .dark .mq-out { -webkit-text-stroke-color: rgba(96,165,250,.6); }
+        .dark .mq-fill { color: #fff; }
+        .tilt { position: relative; }
+        .tilt.tilt { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--ty, 0px)); transition: opacity .7s ease calc(var(--i, 0) * 70ms), translate .7s ease calc(var(--i, 0) * 70ms), transform .15s ease-out, box-shadow .3s, border-color .3s; }
+        .tilt.tilt:hover { --ty: -4px; }
+        .tilt::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s; background: radial-gradient(260px circle at var(--gx, 50%) var(--gy, 50%), rgba(96,165,250,.2), transparent 60%); }
+        .tilt:hover::after { opacity: 1; }
+        .rv { opacity: 0; translate: 0 28px; }
+        .rv.in { opacity: 1; translate: 0 0; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .35; pointer-events: none; will-change: transform; }
+        @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; translate: none; } .arc { stroke-dashoffset: 0; } .w > span { transform: none; } .fade-in { opacity: 1; } }
     </style>
 </head>
 <body class="bg-[#F3F4F6] dark:bg-gray-900 text-[#111827] dark:text-gray-100 transition-colors duration-300">
@@ -435,28 +479,59 @@ $popularSearches = ['Remote', 'Full-time', 'Translation', 'Sales', 'IT'];
 </div>
 
 <!-- ========== HERO ========== -->
-<section class="relative pt-32 pb-24 brand-gradient overflow-hidden">
-    <div class="absolute inset-0 opacity-10 pointer-events-none">
-        <i class="fas fa-briefcase absolute text-9xl top-20 left-10 text-white animate-float"></i>
-        <i class="fas fa-handshake absolute text-8xl bottom-10 right-10 text-white animate-float" style="animation-delay: 2s;"></i>
-        <i class="fas fa-language absolute text-7xl top-40 right-[15%] text-white animate-float" style="animation-delay: 4s;"></i>
+<?php
+// Floating glass chips in the hero use real latest jobs (hidden if there are none)
+$heroChips = [];
+foreach (array_slice($latestJobs, 0, 3) as $hj) {
+    $heroChips[] = [
+        'title' => (string)($hj['title'] ?? ''),
+        'sub'   => !empty($hj['city']) ? (string)$hj['city'] : (string)($hj['job_category'] ?: 'Ghana'),
+        'url'   => '/job-detail.php?id=' . (int)$hj['id'],
+    ];
+}
+$chipSpots = ['right:4%;top:20%;--m:34;--s:.10', 'right:19%;top:48%;--m:20;--s:.22', 'right:2%;top:68%;--m:48;--s:.06'];
+$headline  = explode(' ', 'Where Ghanaian talent meets Chinese opportunity');
+$mw = !empty($categories) ? array_map(fn($c) => (string)$c['job_category'], $categories)
+    : ['Translation', 'Sales', 'IT & Technology', 'Education', 'Customer Service', 'Healthcare'];
+while (count($mw) < 10) { $mw = array_merge($mw, $mw); }
+?>
+<section id="hero" class="hero">
+    <div class="hero-layer px" style="--m:6;--s:.45" aria-hidden="true">
+        <div class="aurora a1"></div><div class="aurora a2"></div><div class="aurora a3"></div>
+    </div>
+    <div class="hero-layer hero-grid px" style="--m:10;--s:.38" aria-hidden="true"></div>
+    <div class="hero-layer px" style="--m:16;--s:.3" aria-hidden="true">
+        <svg class="w-full h-full" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="arcG" x1="0" x2="1"><stop offset="0" stop-color="#10B981"/><stop offset="1" stop-color="#60A5FA"/></linearGradient></defs>
+            <path id="bridgePath" class="arc" pathLength="1" d="M150 480 C 420 60, 800 40, 1060 220" fill="none" stroke="url(#arcG)" stroke-width="2.5" stroke-linecap="round"/>
+            <circle r="6" fill="#FDB813"><animateMotion dur="7s" begin="1.6s" repeatCount="indefinite"><mpath href="#bridgePath"/></animateMotion></circle>
+            <g class="node"><circle cx="150" cy="480" r="7" fill="#10B981"/><circle class="ring" cx="150" cy="480" r="7" stroke="#10B981"/><text x="150" y="518" text-anchor="middle">Accra</text></g>
+            <g class="node"><circle cx="1060" cy="220" r="7" fill="#60A5FA"/><circle class="ring" cx="1060" cy="220" r="7" stroke="#60A5FA"/><text x="1060" y="258" text-anchor="middle">China</text></g>
+        </svg>
     </div>
 
+    <?php foreach ($heroChips as $ci => $chip): ?>
+    <a href="<?= esc($chip['url']) ?>" class="chip px hidden xl:block" style="<?= $chipSpots[$ci] ?>">
+        <span class="chip-in" style="animation-delay:-<?= $ci * 2 ?>s">
+            <span class="chip-ico"><i class="fas fa-briefcase"></i></span>
+            <span class="min-w-0">
+                <span class="block text-sm font-semibold truncate"><?= esc($chip['title']) ?></span>
+                <span class="block text-xs text-white/60 truncate"><?= esc($chip['sub']) ?></span>
+            </span>
+        </span>
+    </a>
+    <?php endforeach; ?>
+
     <div class="container mx-auto px-4 relative z-10">
-        <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
-            <div class="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-5 py-2.5 mb-6">
-                <i class="fas fa-earth-africa text-[#FDB813]"></i>
-                <span class="text-sm font-semibold text-white">Bridging China &amp; Ghana</span>
-            </div>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
-                Find Your Next Career in Ghana
+        <div class="max-w-3xl">
+            <h1 class="font-display font-extrabold mb-6" style="font-size:clamp(2.6rem,6.2vw,5.2rem);line-height:1.02">
+                <?php foreach ($headline as $i => $word): ?><span class="w"><span style="--i:<?= $i ?>"><?= esc($word) ?></span></span> <?php endforeach; ?>
             </h1>
-            <p class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10">
+            <p class="fade-in text-lg md:text-xl text-white/75 max-w-xl mb-9" style="--dl:.9s">
                 TransNow connects Chinese employers and Ghanaian talent through communication, culture, and career opportunities.
             </p>
 
-            <!-- Search -->
-            <form method="GET" action="/jobs.php" class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-2 flex flex-col md:flex-row gap-2 text-left focus-within:ring-2 focus-within:ring-white/70">
+            <form method="GET" action="/jobs.php" class="fade-in bg-white/95 dark:bg-gray-800/95 rounded-2xl shadow-2xl p-2 flex flex-col md:flex-row gap-2 text-left text-gray-900 focus-within:ring-2 focus-within:ring-white/70" style="--dl:1.05s">
                 <div class="flex-1 relative group">
                     <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-hover:text-blue-500 transition"></i>
                     <input type="text" name="search" placeholder="Job title, skills, or keywords..." aria-label="Job title, skills, or keywords"
@@ -472,22 +547,31 @@ $popularSearches = ['Remote', 'Full-time', 'Translation', 'Sales', 'IT'];
                 </button>
             </form>
 
-            <div class="mt-6 flex flex-wrap justify-center gap-2">
-                <span class="text-white/70 text-sm self-center">Popular:</span>
+            <div class="fade-in mt-6 flex flex-wrap gap-2" style="--dl:1.2s">
+                <span class="text-white/60 text-sm self-center">Popular:</span>
                 <?php foreach ($popularSearches as $term): ?>
-                    <a href="/jobs.php?search=<?= urlencode($term) ?>" class="text-white/80 hover:text-white text-sm bg-white/10 hover:bg-white/20 px-3 py-1 rounded-full transition">
-                        <?= esc($term) ?>
-                    </a>
+                    <a href="/jobs.php?search=<?= urlencode($term) ?>" class="text-white/80 hover:text-white text-sm bg-white/10 hover:bg-white/20 border border-white/10 px-3 py-1 rounded-full transition"><?= esc($term) ?></a>
                 <?php endforeach; ?>
             </div>
         </div>
     </div>
 
-    <div class="absolute bottom-0 left-0 w-full -mb-1">
+    <div class="absolute bottom-0 left-0 w-full -mb-1 z-10">
         <svg class="w-full h-16 text-[#F3F4F6] dark:text-gray-900 fill-current" preserveAspectRatio="none" viewBox="0 0 1200 120" aria-hidden="true">
             <path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z"></path>
         </svg>
     </div>
+</section>
+
+<!-- Scroll-driven category marquee (decorative) -->
+<section class="mq" aria-hidden="true">
+<?php foreach ([1, -1] as $dir): $list = $dir > 0 ? $mw : array_reverse($mw); ?>
+    <div class="mq-track" data-dir="<?= $dir ?>">
+    <?php for ($copy = 0; $copy < 2; $copy++): foreach ($list as $k => $word): ?>
+        <span class="mq-item <?= (($k + ($dir > 0 ? 0 : 1)) % 2) ? 'mq-fill' : 'mq-out' ?>"><?= esc($word) ?></span><i class="mq-dot"></i>
+    <?php endforeach; endfor; ?>
+    </div>
+<?php endforeach; ?>
 </section>
 
 <!-- ========== STATS ========== -->
@@ -534,8 +618,8 @@ $popularSearches = ['Remote', 'Full-time', 'Translation', 'Sales', 'IT'];
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             <?php foreach ($categories as $i => $cat): ?>
             <a href="/jobs.php?category=<?= urlencode((string)$cat['job_category']) ?>"
-               class="category-card bg-white dark:bg-gray-800 rounded-xl p-5 text-center block"
-               data-aos="fade-up" data-aos-delay="<?= min($i * 50, 300) ?>">
+               class="category-card tilt rv bg-white dark:bg-gray-800 rounded-xl p-5 text-center block"
+               style="--i:<?= (int)$i ?>">
                 <div class="w-14 h-14 brand-gradient rounded-xl flex items-center justify-center mx-auto mb-3 shadow-md">
                     <i class="fas <?= esc(home_category_icon($cat['job_category'])) ?> text-white text-xl"></i>
                 </div>
@@ -575,7 +659,7 @@ $popularSearches = ['Remote', 'Full-time', 'Translation', 'Sales', 'IT'];
                     $summary = home_excerpt(($job['overview'] ?? '') !== '' ? $job['overview'] : ($job['description'] ?? ''), 110);
                     $place = !empty($job['city']) ? $job['city'] . ', Ghana' : 'Ghana';
                 ?>
-                <article class="job-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden flex flex-col" data-aos="fade-up" data-aos-delay="<?= min($i * 50, 250) ?>">
+                <article class="job-card tilt rv bg-white dark:bg-gray-800 rounded-xl overflow-hidden flex flex-col" style="--i:<?= (int)$i ?>">
                     <div class="h-1.5 brand-gradient"></div>
                     <div class="p-5 flex flex-col flex-1">
                         <div class="flex flex-wrap gap-2 mb-3">
@@ -659,7 +743,7 @@ $popularSearches = ['Remote', 'Full-time', 'Translation', 'Sales', 'IT'];
 
         <div class="grid md:grid-cols-3 gap-6">
             <?php foreach ($testimonials as $i => $t): ?>
-            <div class="story-card bg-white dark:bg-gray-800 rounded-xl p-6 flex flex-col" data-aos="fade-up" data-aos-delay="<?= $i * 100 ?>">
+            <div class="story-card tilt rv bg-white dark:bg-gray-800 rounded-xl p-6 flex flex-col" style="--i:<?= (int)$i ?>">
                 <div class="flex mb-3"><?= home_stars($t['rating'] ?? 5) ?></div>
                 <p class="text-[#4B5563] dark:text-gray-300 leading-relaxed mb-5 flex-1">&ldquo;<?= esc(home_excerpt($t['content'] ?? '', 220)) ?>&rdquo;</p>
                 <div class="flex items-center pt-4 border-t border-gray-100 dark:border-gray-700">
@@ -714,14 +798,13 @@ $popularSearches = ['Remote', 'Full-time', 'Translation', 'Sales', 'IT'];
 </section>
 
 <!-- ========== CAREER ADVICE ========== -->
-<section class="py-14 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-    <div class="container mx-auto px-4">
-        <div class="max-w-3xl mx-auto text-center" data-aos="zoom-in">
-            <div class="w-20 h-20 bg-[#10B981]/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-lightbulb text-3xl text-[#10B981]"></i>
-            </div>
-            <h2 class="text-3xl md:text-4xl font-bold mb-4"><span class="gradient-text">Career Advice</span></h2>
-            <p class="text-[#6B7280] dark:text-gray-400 text-lg mb-6">Practical guidance to help you prepare for your next role.</p>
+<section class="relative overflow-hidden bg-[#081029] text-white py-24">
+    <div class="orb" data-parallax="-0.15" style="width:380px;height:380px;left:-90px;top:-70px;background:#2563EB"></div>
+    <div class="orb" data-parallax="0.2" style="width:320px;height:320px;right:-70px;bottom:-90px;background:#10B981"></div>
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-3xl mx-auto text-center rv">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Prepare for your next role</h2>
+            <p class="text-white/70 text-lg mb-8">Practical career advice to help you stand out with Chinese and Ghanaian employers.</p>
             <a href="/blog.php" class="btn-accent inline-flex items-center space-x-2 px-8 py-4 text-lg"><i class="fas fa-book-open"></i><span>Read the Blog</span></a>
         </div>
     </div>
@@ -874,6 +957,73 @@ $popularSearches = ['Remote', 'Full-time', 'Translation', 'Sales', 'IT'];
             });
         }, { threshold: 0.5 });
         counters.forEach(function (c) { observer.observe(c); });
+    })();
+</script>
+<script>
+    // Parallax hero (mouse + scroll), scroll-driven marquee and orbs, card tilt, reveal on scroll
+    (function () {
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var rv = [].slice.call(document.querySelectorAll('.rv'));
+        if (reduce || !('IntersectionObserver' in window)) { rv.forEach(function (el) { el.classList.add('in'); }); }
+        else {
+            var io = new IntersectionObserver(function (es) {
+                es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+            }, { threshold: 0.15 });
+            rv.forEach(function (el) { io.observe(el); });
+        }
+        if (reduce) return;
+
+        var hero = document.getElementById('hero');
+        if (hero && 'IntersectionObserver' in window) {
+            var tx = 0, ty = 0, mx = 0, my = 0, on = false, raf = 0;
+            var loop = function () {
+                mx += (tx - mx) * 0.08; my += (ty - my) * 0.08;
+                hero.style.setProperty('--mx', mx.toFixed(3));
+                hero.style.setProperty('--my', my.toFixed(3));
+                hero.style.setProperty('--sy', Math.min(window.scrollY, 1000));
+                if (on) raf = requestAnimationFrame(loop);
+            };
+            hero.addEventListener('pointermove', function (e) {
+                if (e.pointerType === 'touch') return;
+                tx = (e.clientX / window.innerWidth - 0.5) * 2; ty = (e.clientY / window.innerHeight - 0.5) * 2;
+            });
+            hero.addEventListener('pointerleave', function () { tx = 0; ty = 0; });
+            new IntersectionObserver(function (es) {
+                on = es[0].isIntersecting; cancelAnimationFrame(raf); if (on) loop();
+            }).observe(hero);
+        }
+
+        var tracks = [].slice.call(document.querySelectorAll('.mq-track'));
+        var orbs = [].slice.call(document.querySelectorAll('[data-parallax]'));
+        var queued = false;
+        function update() {
+            queued = false;
+            var y = window.scrollY, vh = window.innerHeight;
+            tracks.forEach(function (t) {
+                var half = t.scrollWidth / 2, dir = parseFloat(t.dataset.dir) || 1, off = (y * 0.45) % half;
+                t.style.transform = 'translate3d(' + (dir > 0 ? -off : off - half) + 'px,0,0)';
+            });
+            orbs.forEach(function (o) {
+                var r = o.parentNode.getBoundingClientRect();
+                if (r.bottom < 0 || r.top > vh) return;
+                o.style.transform = 'translate3d(0,' + ((r.top + r.height / 2 - vh / 2) * parseFloat(o.dataset.parallax)).toFixed(1) + 'px,0)';
+            });
+        }
+        window.addEventListener('scroll', function () { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+
+        document.querySelectorAll('.tilt').forEach(function (el) {
+            el.addEventListener('pointermove', function (e) {
+                if (e.pointerType !== 'mouse') return;
+                var r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+                el.style.setProperty('--ry', ((x - 0.5) * 8).toFixed(2) + 'deg');
+                el.style.setProperty('--rx', ((0.5 - y) * 8).toFixed(2) + 'deg');
+                el.style.setProperty('--gx', (x * 100).toFixed(0) + '%');
+                el.style.setProperty('--gy', (y * 100).toFixed(0) + '%');
+            });
+            el.addEventListener('pointerleave', function () { el.style.setProperty('--rx', '0deg'); el.style.setProperty('--ry', '0deg'); });
+        });
     })();
 </script>
 </body>
